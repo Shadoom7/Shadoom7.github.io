@@ -21,7 +21,8 @@
       }
     </style>
     <script src="jquery-1.10.2.min.js"></script>
-    <script>
+    <!--
+    <script type="text/javascript">
       $(document).ready(function() {
         $('#submit').click(function () {
           $.ajax({ url: "https://7bgmopnz17.execute-api.us-west-1.amazonaws.com/test1/test",
@@ -38,8 +39,7 @@
           })
         })
   </script>
-  <!--
-      <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+-->
       <script type="text/javascript">
           function calculate() {
               $.ajax({
@@ -48,7 +48,9 @@
                   url: "https://7bgmopnz17.execute-api.us-west-1.amazonaws.com/test1/test" ,//url
                   data: $('#form1').serialize(),
                   success: function (result) {
-                      document.getElementById("kernel").innerHTML=result;
+                    alert("Thank you for your comment!");
+                    document.getElementById("kernel").innerHTML=result;
+
                   },
                   error : function() {
                       alert("Error");
@@ -56,7 +58,6 @@
               });
           }
       </script>
-  -->
 
   </head>
   <body class="text-center">
@@ -74,9 +75,9 @@
   <main role="main" class="inner cover">
     <h1 class="cover-heading">Enter your equation</h1>
     <div id="kernel">
-      <form  id="form1" action ="https://7bgmopnz17.execute-api.us-west-1.amazonaws.com/test1/test" method = "get">
+      <form  id="form1" action ="##" method = "get">
         <input type="text" name="content" >
-        <button id = "submit" type="submit">Calculate</button>
+        <input type="botton" value="Calculate" onclick="calculate">
       </form>
     </div>
     <p class="lead"><br>1.You should use "\\" instead of "λ" in the equation <br><br> 2. you should add an "@" before each λ function you wrote to combine it with the first parameter after it.<br><br> 3.Don't use parentheses. Write each binary operator as a function that takes the first two parameters afterwards.  </p>
