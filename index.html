@@ -20,38 +20,43 @@
         }
       }
     </style>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
-    <script src="http://malsup.github.com/jquery.form.js"></script>
-
+    <script src="jquery-1.10.2.min.js"></script>
     <script>
-        // wait for the DOM to be loaded
-        $(document).ready(function() {
-            // bind 'myForm' and provide a simple callback function
-            $('#form1').ajaxForm(function(event) {
-                alert("Thank you for your comment!");
-            });
-        });
-    </script>
-<!--
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript">
-        function calculate() {
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "https://7bgmopnz17.execute-api.us-west-1.amazonaws.com/test1/test" ,//url
-                data: $('#form1').serialize(),
-                success: function (result) {
-                    document.getElementById("kernel").innerHTML=result;
-                },
-                error : function() {
-                    alert("Error");
-                }
-            });
-        }
-    </script>
--->
+      $(document).ready(function() {
+        $('#submit').click(function () {
+          $.ajax({ url: "https://7bgmopnz17.execute-api.us-west-1.amazonaws.com/test1/test",
+                   type: "GET",
+                   dataType: "json",
+                   data: $('#form1').serialize(),
+                   success: function (result) {
+                     alert("Thank you for your comment!");
+                   },
+                   error : function() {
+                       alert("Error");
+                   }
+                 });
+          })
+        })
+  </script>
+  <!--
+      <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+      <script type="text/javascript">
+          function calculate() {
+              $.ajax({
+                  type: "GET",
+                  dataType: "json",
+                  url: "https://7bgmopnz17.execute-api.us-west-1.amazonaws.com/test1/test" ,//url
+                  data: $('#form1').serialize(),
+                  success: function (result) {
+                      document.getElementById("kernel").innerHTML=result;
+                  },
+                  error : function() {
+                      alert("Error");
+                  }
+              });
+          }
+      </script>
+  -->
 
   </head>
   <body class="text-center">
@@ -71,7 +76,7 @@
     <div id="kernel">
       <form  id="form1" action ="https://7bgmopnz17.execute-api.us-west-1.amazonaws.com/test1/test" method = "get">
         <input type="text" name="content" >
-        <button type="submit">Calculate</button>
+        <button id = "submit" type="submit">Calculate</button>
       </form>
     </div>
     <p class="lead"><br>1.You should use "\\" instead of "λ" in the equation <br><br> 2. you should add an "@" before each λ function you wrote to combine it with the first parameter after it.<br><br> 3.Don't use parentheses. Write each binary operator as a function that takes the first two parameters afterwards.  </p>
