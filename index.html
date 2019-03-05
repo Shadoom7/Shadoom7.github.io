@@ -79,7 +79,7 @@ function makeCorsRequest(urll) {
       $(document).ready(function() {
         $("#form1").submit(function(event){
           event.preventDefault(); //prevent default action
-          var post_url = $(this).attr("action")+"?content=1"; //get form action url
+          var post_url = $(this).attr("action"); //get form action url
           var form_data = $(this).serialize(); //Encode form elements for submission
           $.get( post_url, form_data, function( response ) {
             $("#kernel").html( response );
@@ -125,11 +125,12 @@ function makeCorsRequest(urll) {
 
   <main role="main" class="inner cover">
     <h1 class="cover-heading">Enter your equation</h1>
-    <div id="kernel">
+
       <form  id="form1" action ="https://7bgmopnz17.execute-api.us-west-1.amazonaws.com/test1/test" method = "get">
         <input id = "equation" type="text" name="content" >
         <input type="submit" name="submit" value="Submit Form" />
       </form>
+    <div id="kernel">
     </div>
     <p class="lead"><br>1.You should use "\\" instead of "λ" in the equation <br><br> 2. you should add an "@" before each λ function you wrote to combine it with the first parameter after it.<br><br> 3.Don't use parentheses. Write each binary operator as a function that takes the first two parameters afterwards.  </p>
 
