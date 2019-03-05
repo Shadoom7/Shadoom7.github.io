@@ -21,8 +21,10 @@
       }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--
     <script>
     // Create the XHR object.
+
 function createCORSRequest(method, url) {
   var xhr = new XMLHttpRequest();
   if ("withCredentials" in xhr) {
@@ -70,14 +72,21 @@ function makeCorsRequest(urll) {
 }
 
     </script>
+  -->
 
     <script type="text/javascript">
+
       $(document).ready(function() {
         $("#form1").submit(function(event){
           event.preventDefault(); //prevent default action
           var post_url = $(this).attr("action")+"?content=1"; //get form action url
           var form_data = $(this).serialize(); //Encode form elements for submission
-          makeCorsRequest(post_url);
+          $.get( post_url, form_data, function( response ) {
+            $("#kernel").html( response );
+          });
+
+          //makeCorsRequest(post_url);
+
         });
       })
   </script>
