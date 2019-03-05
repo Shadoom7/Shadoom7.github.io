@@ -84,8 +84,8 @@ function makeCorsRequest(urll) {
           $.get( post_url, form_data, function( data ) {
             datastring = JSON.stringify(data);
             $("#kernel").html( datastring);
-            eval("var object1 = " +datastring)
-            alert(object1);
+            eval("var object1 = " + datastring)
+            alert(object1.content);
           });
 
           //makeCorsRequest(post_url);
