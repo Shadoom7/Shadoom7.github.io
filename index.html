@@ -82,10 +82,10 @@ function makeCorsRequest(urll) {
           var post_url = $(this).attr("action"); //get form action url
           var form_data = $(this).serialize(); //Encode form elements for submission
           $.get( post_url, form_data, function( data ) {
-
-            object1 = new JSONObject(data);
+            datastring = JSON.stringify(data);
+            $("#kernel").html( datastring);
+            eval("var object1 = " +datastring)
             alert(object1);
-            $("#kernel").html( JSON.stringify(data) );
           });
 
           //makeCorsRequest(post_url);
