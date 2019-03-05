@@ -21,20 +21,67 @@
       }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!--
+    <script>
+    // Create the XHR object.
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+}
+
+// Helper method to parse the title tag from the response.
+function getTitle(text) {
+  return text.match('<title>(.*)?</title>')[1];
+}
+
+// Make the actual CORS request.
+function makeCorsRequest(urll) {
+  // This is a sample server that supports CORS.
+  var url = urll;
+
+  var xhr = createCORSRequest('GET', url);
+  if (!xhr) {
+    alert('CORS not supported');
+    return;
+  }
+
+  // Response handlers.
+  xhr.onload = function() {
+    var text = xhr.responseText;
+    var title = getTitle(text);
+    alert('Response from CORS request to ' + url + ': ' + title);
+  };
+
+  xhr.onerror = function() {
+    alert('Woops, there was an error making the request.');
+  };
+
+  xhr.send();
+}
+
+    </script>
+
     <script type="text/javascript">
       $(document).ready(function() {
         $("#form1").submit(function(event){
           event.preventDefault(); //prevent default action
-          var post_url = $(this).attr("action"); //get form action url
+          var post_url = $(this).attr("action")+"?content=1"; //get form action url
           var form_data = $(this).serialize(); //Encode form elements for submission
-          $.get( post_url, form_data, function( response ) {
-            alert("Thank you for your comment!");
-          });
+          makeCorsRequest(post_url);
         });
       })
   </script>
-
+<!--
       <script type="text/javascript">
           function calculate() {
               $.ajax({
@@ -71,7 +118,7 @@
     <h1 class="cover-heading">Enter your equation</h1>
     <div id="kernel">
       <form  id="form1" action ="https://7bgmopnz17.execute-api.us-west-1.amazonaws.com/test1/test" method = "get">
-        <input type="text" name="content" >
+        <input id = "equation" type="text" name="content" >
         <input type="submit" name="submit" value="Submit Form" />
       </form>
     </div>
